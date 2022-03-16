@@ -1,0 +1,82 @@
+{
+  "name": "Company",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "CompanyId": {
+      "type": "number"
+    }
+  
+  },
+  "validations": [],
+  "relations": {
+    "Appuser": {
+      "type": "hasMany",
+      "model": "Appuser",
+      "foreignKey": "companyId",
+      "through": "Realm"
+    },
+    "Site": {
+      "type": "hasMany",
+      "model": "Site",
+      "foreignKey": "companyId",
+      "through": "Realm"
+    }
+  },
+
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestDataByDevice"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestDataByDevice"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestDataByDevice"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": [
+        "dataDevice"
+      ]
+    }
+  ],
+  "methods": {}
+}

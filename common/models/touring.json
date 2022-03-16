@@ -1,0 +1,161 @@
+{
+  "name": "TourTimetable",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "am12": {
+      "type": "number"
+    },
+    "am1": {
+      "type": "number"
+    },
+    "am2": {
+      "type": "number"
+    },
+    "am3": {
+      "type": "number"
+    },
+    "am4": {
+      "type": "number"
+    },
+    "am5": {
+      "type": "number"
+    },
+    "am6": {
+      "type": "number"
+    },
+    "am7": {
+      "type": "number"
+    },
+    "am8": {
+      "type": "number"
+    },
+    "am9": {
+      "type": "number"
+    },
+    "am10": {
+      "type": "number"
+    },
+    "am11": {
+      "type": "number"
+    },
+    "pm12": {
+      "type": "number"
+    },
+    "pm1": {
+      "type": "number"
+    },
+    "pm2": {
+      "type": "number"
+    },
+    "pm3": {
+      "type": "number"
+    },
+    "pm4": {
+      "type": "number"
+    },
+    "pm5": {
+      "type": "number"
+    },
+    "pm6": {
+      "type": "number"
+    },
+    "pm7": {
+      "type": "number"
+    },
+    "pm8": {
+      "type": "number"
+    },
+    "pm9": {
+      "type": "number"
+    },
+    "pm10": {
+      "type": "number"
+    },
+    "pm11": {
+      "type": "number"
+    },
+    "siteId": {
+      "type": "number"
+    },
+    "alert": {
+      "type": "number"
+    },
+    "alertTime": {
+      "type": "string",
+      "format": "time"
+    }
+  
+  },
+  "validations": [],
+  "relations": {
+    "Site": {
+      "type": "belongsTo",
+      "model": "Site",
+      "foreignKey": "siteId"
+    }
+  },
+
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "latestAllData",
+        "addTimetableData",
+        "deleteTimetableData"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "latestAllData",
+        "addTimetableData",
+        "deleteTimetableData"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "latestAllData",
+        "addTimetableData",
+        "deleteTimetableData"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": [
+        "dataDevice",
+        "getLatestCompanyData"
+      ]
+    }
+  ],
+  "methods": {}
+}

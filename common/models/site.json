@@ -1,0 +1,102 @@
+{
+  "name": "Site",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "apiKey": {
+      "type": "string"
+    },
+    "alertSwitch": {
+      "type": "number"
+    }
+  
+  },
+  "validations": [],
+  "relations": {
+    "Device": {
+      "type": "hasMany",
+      "model": "Device",
+      "foreignKey": "siteId"
+    },
+    "Appuser": {
+      "type": "hasMany",
+      "model": "Appuser",
+      "foreignKey": "siteId",
+      "through": "Realm"
+    },
+    "Company": {
+      "type": "hasMany",
+      "model": "Company",
+      "foreignKey": "siteId",
+      "through": "Realm"
+    },
+    "TourTimetable": {
+      "type": "hasOne",
+      "model": "TourTimetable",
+      "foreignKey": "siteId"
+    }
+  },
+
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "latestAllData",
+        "siteList"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "latestAllData",
+        "siteList"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "latestAllData",
+        "siteList"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": [
+        "dataDevice",
+        "getLatestCompanyData"
+      ]
+    }
+  ],
+  "methods": {}
+}

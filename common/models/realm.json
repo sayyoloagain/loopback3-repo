@@ -1,0 +1,86 @@
+{
+  "name": "Realm",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "companyId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "siteId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "AppUser": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    },
+    "Company": {
+      "type": "belongsTo",
+      "model": "Company",
+      "foreignKey": "companyId"
+    },
+    "Site": {
+      "type": "belongsTo",
+      "model": "Site",
+      "foreignKey": "siteId"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "register",
+        "listDevice",
+        "updateInfo",
+        "updateDevice",
+        "deviceAddXox"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "register",
+        "listDevice",
+        "updateInfo",
+        "updateDevice",
+        "deviceAddXox"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "deviceAddXox"
+      ]
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,130 @@
+{
+  "name": "DataPlanXox",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "serviceProvider": {
+      "type": "string"
+    },
+    "simCardExpiryDate": {
+      "type": "Date",
+      "mysql": {
+        "columnName": "simCardExpiryDate",
+        "dataType": "date",
+        "nullable": "N"
+      }
+    },
+    "dataExpiryDate": {
+      "type": "String",
+      "mysql": {
+        "columnName": "dataExpiryDate",
+        "dataType": "string",
+        "nullable": "N"
+      }
+    },
+    "seasonPassExpiryDate": {
+      "type": "String",
+      "mysql": {
+        "columnName": "seasonPassExpiryDate",
+        "dataType": "string",
+        "nullable": "N"
+      }
+    },
+    "seasonPassBal": {
+      "type": "number"
+    },
+    "dataQuota": {
+      "type": "number"
+    },
+    "dataBalance": {
+      "type": "number"
+    },  
+    "createdAt": {
+      "type": "date",
+      "jsonSchema": { 
+        "format": "date"
+      }
+    }, 
+    "linkToXox": {
+      "type": "string"
+    },
+    "deviceId": {
+      "type": "number"
+    }
+  
+  },
+  "validations": [],
+  "relations": {
+    "Device": {
+      "type": "belongsTo",
+      "model": "Device",
+      "foreignKey": "deviceId"
+    }
+  },
+
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "addXox",
+        "updateXox",
+        "updateMaxisToXox",
+        "deleteXox"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "addXox",
+        "updateXox",
+        "updateMaxisToXox",
+        "deleteXox"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "addXox",
+        "updateXox",
+        "updateMaxisToXox",
+        "deleteXox"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": [
+        "dataDevice",
+        "getLatestCompanyData"
+      ]
+    }
+  ],
+  "methods": {}
+}

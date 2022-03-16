@@ -1,0 +1,210 @@
+{
+  "name": "AppUser",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "contact": {
+      "type": "string"
+    },
+    "accessCard": {
+      "type": "string"
+    },
+    "createdDate": {
+      "type": "Date",
+      "defaultFn": "now"
+    },
+    "createdBy": {
+      "type": "number",
+      "required": true
+    },
+    "modifiedDate": {
+      "type": "Date"
+    },
+    "modifiedBy": {
+      "type": "number"
+    },
+    "lastLogin": {
+      "type": "Date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "Company": {
+      "type": "hasMany",
+      "model": "Company",
+      "foreignKey": "userId",
+      "through": "Realm"
+    },
+    "Site": {
+      "type": "hasMany",
+      "model": "Site",
+      "foreignKey": "userId",
+      "through": "Realm"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property":[
+        "ListUserbyEmail",
+        "listUserbyEmail"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "system",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "patchAttributes",
+
+        "registerAdmin",
+        "registerManager",
+        "registerSupervisor",
+        "registerNormalUser",
+        "removeUser",
+        "listUser",
+        "listAdmin",
+        "listManager",
+        "listSupervisor",
+        "listNormalUser",
+        "updateUserbyEmail",
+        "updateUser",
+        "changeUserRole",
+        "ResetPasswordbyEmail",
+        "resetPasswordUser",
+        "getProfileData",
+        "profileUpdate"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "patchAttributes",
+
+        "registerAdmin",
+        "registerManager",
+        "registerSupervisor",
+        "registerNormalUser",
+        "removeUser",
+        "listUser",
+        "listAdmin",
+        "listManager",
+        "listSupervisor",
+        "listNormalUser",
+        "updateUserbyEmail",
+        "updateUser",
+        "changeUserRole",
+        "ResetPasswordbyEmail",
+        "resetPasswordUser",
+        "getProfileData",
+        "profileUpdate"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "patchAttributes",
+
+        "registerAdmin",
+        "registerManager",
+        "registerSupervisor",
+        "registerNormalUser",
+        "removeUser",
+        "listUser",
+        "listAdmin",
+        "listManager",
+        "listSupervisor",
+        "listNormalUser",
+        "updateUserbyEmail",
+        "updateUser",
+        "changeUserRole",
+        "resetPasswordUser",
+        "ResetPasswordbyEmail",
+        "testing",
+        "getProfileData",
+        "profileUpdate"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "findById",
+        "registerSupervisor",
+        "registerNormalUser",
+        "removeUser",
+        "listSupervisor",
+        "listNormalUser",
+        "updateUserbyEmail",
+        "updateUser",
+        "changeUserRole",
+        "resetPasswordUser",
+        "getProfileData",
+        "profileUpdate"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "supervisor",
+      "permission": "ALLOW",
+      "property": [
+        "findById",
+        "registerNormalUser",
+        "removeUser",
+        "listNormalUser",
+        "updateUserbyEmail",
+        "updateUser",
+        "resetPasswordUser",
+        "changeUserRole",
+        "getProfileData",
+        "profileUpdate"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "normal",
+      "permission": "ALLOW",
+      "property": [
+        "findById",
+        "removeUser",
+        "updateUserbyEmail",
+        "updateUser",
+        "getProfileData"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "property": [
+        "patchAttributes",
+        "getProfileData"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": [
+        "registerNormalUser"
+      ]
+    }
+  ],
+  "methods": {}
+}

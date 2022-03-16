@@ -1,0 +1,103 @@
+{
+  "name": "DataPlanMaxis",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "serviceProvider": {
+      "type": "string"
+    },
+    "dataExpiryDate": {
+      "type": "date",
+      "mysql": {
+        "dataType": "DATE"
+      }
+    },  
+    "createdAt": {
+      "type": "date",
+      "mysql": {
+        "dataType": "DATE"
+      }
+    },
+    "linkToMaxis": {
+      "type": "string"
+    },
+    "deviceId": {
+      "type": "number"
+    }
+  
+  },
+  "validations": [],
+  "relations": {
+    "Device": {
+      "type": "belongsTo",
+      "model": "Device",
+      "foreignKey": "deviceId"
+    }
+  },
+
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "addMaxis",
+        "updateMaxis",
+        "updateXoxToMaxis",
+        "deleteMaxis"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "addMaxis",
+        "updateMaxis",
+        "updateXoxToMaxis",
+        "deleteMaxis"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "getLatestCompanyData",
+        "getLatestDataByDevice",
+        "addMaxis",
+        "updateMaxis",
+        "updateXoxToMaxis",
+        "deleteMaxis"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": [
+        "dataDevice",
+        "getLatestCompanyData"
+      ]
+    }
+  ],
+  "methods": {}
+}

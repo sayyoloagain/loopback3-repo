@@ -1,0 +1,99 @@
+{
+  "name": "Device",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "mobileNumber": {
+      "type": "string",
+      "required": true
+    },
+    "serialNumber": {
+      "type": "number",
+      "required": true
+    },
+    "deviceUsername": {
+      "type": "string",
+      "required": true
+    },
+    "devicePassword": {
+      "type": "string",
+      "required": true
+    },
+    "siteId": {
+      "type": "number",
+      "required": true
+    },
+    "serviceProvider": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "Site": {
+      "type": "belongsTo",
+      "model": "Site",
+      "foreignKey": "siteId"
+    },
+    "DataPlanXox": {
+      "type": "hasMany",
+      "model": "DataPlanXox",
+      "foreignKey": "deviceId"
+    },
+    "DataPlanMaxis": {
+      "type": "hasOne",
+      "model": "DataPlanMaxis",
+      "foreignKey": "deviceId"
+    }
+
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "super",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "register",
+        "listDevice",
+        "updateInfo",
+        "updateDevice",
+        "deviceAddXox"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "register",
+        "listDevice",
+        "updateInfo",
+        "updateDevice",
+        "deviceAddXox"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "count",
+        "deviceAddXox"
+      ]
+    }
+  ],
+  "methods": {}
+}
