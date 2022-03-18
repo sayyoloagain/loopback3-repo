@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "start": "node .",
     "posttest": "npm run lint && npm audit",
+    "postinstall": "npm run build",
+    "start:prod": "node dist/index.js",
     "heroku-postbuild": "npm install && npm run build"
   },
   "dependencies": {
